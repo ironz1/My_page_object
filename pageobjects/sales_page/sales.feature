@@ -4,4 +4,4 @@ Feature: Sales page
   Scenario: Select Sales
     Given I am logged in
     When I select Sales
-    Then Side menu expands
+    Then I can select gift card from side menu

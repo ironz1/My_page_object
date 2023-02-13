@@ -1,5 +1,4 @@
-Feature: Select who is the checkup for
-  As a User
+Feature: Login to system
 
   @automated
   Scenario: Open nopCommerce
