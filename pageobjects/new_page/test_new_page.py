@@ -1,18 +1,41 @@
-from selenium.webdriver.support.wait import WebDriverWait
+from abc import ABC, abstractmethod
 
-class OldPage:
+
+class OldPage(ABC):
     def __init__(self, i, n):
         self.id = i
         self.name = n
         print(f'taki tam argument {i}')
 
+    @abstractmethod
+    def medoda_1(self):
+        pass
+
+    @abstractmethod
+    def metida_2(self):
+        pass
+
 
 class NewPage(OldPage):
+    def metida_2(self):
+        pass
+
+    def medoda_1(self):
+        pass
+
     def __init__(self, a, b, i, n):
         super().__init__(i, n)
         self.field = a
         self.text = b
         # self._wait = WebDriverWait()
+
+
+class ELo(OldPage):
+    def __init__(self, i, n):
+        super().__init__(i, n)
+
+    def xxx(self):
+        pass
 
 
 
