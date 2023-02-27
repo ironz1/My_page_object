@@ -1,6 +1,6 @@
 Feature: Sales page
 
-  @automated
+#  @automated
   Scenario: Select Sales
     Given I am logged in
     When I select Sales

@@ -12,8 +12,8 @@ def base_url():
     return url
 
 
-# @pytest.fixture()
-def selenium():
+@pytest.fixture()
+def selenium_driver():
     service = Service(executable_path="selenium_drivers/chromedriver")
     driver = webdriver.Chrome(service=service)
     return driver
