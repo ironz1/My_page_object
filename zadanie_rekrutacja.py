@@ -9,16 +9,20 @@ class Dom:
     def print_numbers():
         return liczby_losowe
 
-    try:
-        assert 2+2==5
-    except:
-        assert 2+2==4
+    def xx(self):
+        try:
+            assert 2+2==5
+        except:
+            raise ValueError('')
 
+    @staticmethod
     def for_loop(self):
         lst = []
         for x in range(10):
             if x % 2 == 0:
                 lst.append(x)
+            else:
+                raise ValueError('Zle')
         return lst
 
     @staticmethod

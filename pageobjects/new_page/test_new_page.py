@@ -39,8 +39,8 @@ class ELo(OldPage):
 
 
 
-d = OldPage(i=2, n='Jęczy 2')
-print(f'ID = {d.id} and NAME = {d.name}')
-
-newpage = NewPage(i=23, n='Bobek', a='The', b='Tekst napisał')
-print(f'{newpage.text},{newpage.field} {newpage.name} który ma id = {newpage.id}')
+# d = OldPage(i=2, n='Jęczy 2')
+# print(f'ID = {d.id} and NAME = {d.name}')
+#
+# newpage = NewPage(i=23, n='Bobek', a='The', b='Tekst napisał')
+# print(f'{newpage.text},{newpage.field} {newpage.name} który ma id = {newpage.id}')

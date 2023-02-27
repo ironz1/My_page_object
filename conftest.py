@@ -21,7 +21,7 @@ def selenium():
 
 @pytest.hookimpl(tryfirst=True)
 def pytest_sessionfinish(session):
-    session.config._metadata.pop("JAVA_HOME")
+    # session.config._metadata.pop("JAVA_HOME")
     session.config._metadata.pop("Packages")
     session.config._metadata.pop("Plugins")
     session.config._metadata['Project Name'] = 'Frontend tests'
