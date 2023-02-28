@@ -1,34 +1,37 @@
-# from conftest import selenium
+from conftest import selenium_driver
 from selenium.webdriver.support.wait import WebDriverWait
 
 
 class BasePage:
     """BasePage is a parent class for each page class then this way of implementation allow us
     to use his self attributes inside typical page."""
-    # selenium = selenium()
 
-    def __init__(self, base_url, selenium_driver):
+    def __init__(self, base_url, selenium=selenium_driver()):
         self.base_url = base_url
-        self.selenium_driver = selenium_driver
+        self.selenium = selenium
         self.wait = WebDriverWait(driver=selenium_driver, timeout=2)
 
     def open(self):
-        self.selenium_driver.get(self.base_url)
-        self.selenium_driver.maximize_window()
+        self.selenium.get(self.base_url)
+        self.selenium.maximize_window()
 
     def click(self, locator, timeout=6):
         element = self.find_element(locator, timeout=timeout)
         element.click()
 
-    def find_element(self, locator, timeout=6):
-        self.selenium_driver.implicitly_wait(timeout)
-        return self.selenium_driver.find_element(*locator)
+    def find_element(self, locator, timeout=15):
+        self.selenium.implicitly_wait(timeout)
+        return self.selenium.find_element(*locator)
 
     def find_elements(self, locator):
-        return self.selenium_driver.find_elements(*locator)
+        return self.selenium.find_elements(*locator)
 
     def take_screenshot(self):
-        self.selenium_driver.save_screenshot('screenshots/screen.png')
+        self.selenium.save_screenshot('screenshots/screen.png')
 
     def is_page_title_displayed(self):
-        return self.selenium_driver.title
+        return self.selenium.title
+
+    def enter_text(self, locator, string):
+        element = self.find_element(locator)
+        element.send_keys(string)

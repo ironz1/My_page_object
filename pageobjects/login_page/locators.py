@@ -8,10 +8,13 @@ class LoginPageLocators:
     """
     locators = AttrDict(dict(
         login_button=(
-            By.XPATH, '//*[@type="submit"]'),
-        accreditation=(
-            By.XPATH, '//*[@data-test-id="acc"]'),
-        burger_button=(
-            By.XPATH, '//*[@id="header-mega-menu"]/button'),
-
+            By.XPATH, '//*[@href="/auth/login"]'),
+        email_field=(
+            By.ID, 'element-0'),
+        password_field=(
+            By.ID, 'element-3'),
+        start_login_button=(
+            By.XPATH, '//*[@data-gtm-id="start-email-login"]'),
+        app_loaded=(
+            By.ID, 'app_holder')
     ))

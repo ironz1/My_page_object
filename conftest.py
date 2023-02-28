@@ -12,10 +12,12 @@ def base_url():
     return url
 
 
-@pytest.fixture()
+# @pytest.fixture()
 def selenium_driver():
+    options = webdriver.ChromeOptions()
+    options.add_experimental_option("excludeSwitches", ["enable-logging"])  # Logowanie webrdiver wyłączone
     service = Service(executable_path="selenium_drivers/chromedriver")
-    driver = webdriver.Chrome(service=service)
+    driver = webdriver.Chrome(service=service, options=options)
     return driver
 
 
