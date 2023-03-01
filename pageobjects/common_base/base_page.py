@@ -35,3 +35,7 @@ class BasePage:
     def enter_text(self, locator, string):
         element = self.find_element(locator)
         element.send_keys(string)
+
+    def is_element_displayed(self, locator):
+        element = self.find_element(locator)
+        return element.is_displayed()

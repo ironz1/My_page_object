@@ -19,7 +19,7 @@ def is_login_page_displayed(base_url):
 
 
 @then("I can log in")
-def step_impl(base_url):
+def login(base_url):
     NopCommerce(base_url).click_login()
     assert NopCommerce(base_url).is_page_title_displayed() == 'Log in to Todoist'
     NopCommerce(base_url).enter_email(email=LOGIN)
