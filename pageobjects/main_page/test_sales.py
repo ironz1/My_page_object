@@ -6,19 +6,19 @@ scenarios('main.feature')
 
 
 @given("I am logged in")
-def logged_in(base_url):
-    MainPage(base_url).open()
-    login(base_url)
+def logged_in(base_url, selenium):
+    MainPage(base_url, selenium).open()
+    login(base_url, selenium)
 
 
 @when("I add task")
-def add_task(base_url):
-    MainPage(base_url).click_add_task()
-    MainPage(base_url).enter_task_name()
-    MainPage(base_url).enter_task_description()
-    MainPage(base_url).click_add_task_submit_button()
+def add_task(base_url, selenium):
+    MainPage(base_url, selenium).click_add_task()
+    MainPage(base_url, selenium).enter_task_name()
+    MainPage(base_url, selenium).enter_task_description()
+    MainPage(base_url, selenium).click_add_task_submit_button()
 
 
 @then("New task is added")
-def click_side_menu(base_url):
-    assert MainPage(base_url).is_task_on_list()
+def click_side_menu(base_url, selenium):
+    assert MainPage(base_url, selenium).is_task_on_list()

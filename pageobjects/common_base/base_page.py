@@ -1,4 +1,3 @@
-from conftest import selenium_driver
 from selenium.webdriver.support.wait import WebDriverWait
 
 
@@ -6,10 +5,10 @@ class BasePage:
     """BasePage is a parent class for each page class then this way of implementation allow us
     to use his self attributes inside typical page."""
 
-    def __init__(self, base_url, selenium=selenium_driver()):
+    def __init__(self, base_url, selenium):
         self.base_url = base_url
         self.selenium = selenium
-        self.wait = WebDriverWait(driver=selenium_driver, timeout=2)
+        self.wait = WebDriverWait(driver=selenium, timeout=2)
 
     def open(self):
         self.selenium.get(self.base_url)
