@@ -35,7 +35,7 @@ def pytest_html_report_title(report):
 
 
 @pytest.fixture()
-def logged_in_api():
+def logged_in_api_with_login():
     session = requests.Session()
     login_info = {'email': 'homkonektred@gmail.com',
                   'password': 'homeconnect1#'}
@@ -47,4 +47,4 @@ def logged_in_api():
 
 @pytest.fixture()
 def app_url_api():
-    return 'https://todoist.com/'
+    return 'https://api.todoist.com/rest/v2'
