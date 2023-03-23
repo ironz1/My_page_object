@@ -27,7 +27,7 @@ class Dom:
 
     @staticmethod
     def open_write_file():
-        with open('plik.txt', 'w+') as file1:
+        with open('plik2.txt', 'w+') as file1:
             file1.write(str(liczby_losowe))
 
     @staticmethod
