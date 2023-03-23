@@ -11,7 +11,7 @@ class Dom:
 
     def xx(self):
         try:
-            assert 2+2==5
+            assert 2+2 == 5
         except:
             raise ValueError('')
 
