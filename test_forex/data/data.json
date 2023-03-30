@@ -1,0 +1,14 @@
+{
+   "data_fetch_one": [
+            ["EUR", "PLN", [4.5, 4.7], ""],
+            ["USD", "PLN", [4.3, 4.5], ""],
+            ["PLN", "CHF", [0.2, 0.25], ""],
+            ["BOB", "BOB", [1, 1], ""],
+            ["1111", "PLN", [], "Invalid/unsupported target currency: [1111]"],
+            ["BOB", "WKS", [], "Invalid/unsupported target currency: [WKS]"]
+   ],
+  "data_to_convert": [
+    ["USD", "PLN", 100, [434, 436]],
+    []
+  ]
+}

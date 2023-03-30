@@ -1,6 +1,7 @@
 import requests
 from pprint import PrettyPrinter
 from datetime import date
+import json
 
 
 class Currencies:
@@ -13,6 +14,12 @@ class Currencies:
         endpoint = f"{self.url}/currencies?api_key={self.api_key}"
         response = requests.get(endpoint).json()['currencies']
         return response
+
+    def save_json_all_currencies(self):
+        all_currencies = self.all_currencies()
+        data = json.dumps(all_currencies, indent=2)
+        with open('../test_forex/data/json_currencies.json', 'w+') as file:
+            file.write(data)
 
     def get_all_currency_rate(self, currency='USD'):
         endpoint = f'{self.url}/fetch-all?from={currency}&api_key={self.api_key}'
@@ -74,4 +81,5 @@ class Currencies:
                       f'{self.convert_currencies(currency1, currency2, amount)} of {currency2}')
 
 
-Currencies().main()
+# Currencies().main()
+Currencies().save_json_all_currencies()
