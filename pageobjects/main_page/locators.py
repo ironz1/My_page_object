@@ -16,5 +16,5 @@ class MainPageLocators:
         add_task_submit_button=(
             By.XPATH, '//*[@data-testid="task-editor-submit-button"]'),
         task_on_list=(
-            By.XPATH, '//*[@class="markdown_content task_content"][contains(text(),"New")]')
+            By.XPATH, '//*[@class="task_content"][contains(text(),"New task")]')
     ))
