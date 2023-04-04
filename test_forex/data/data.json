@@ -8,7 +8,6 @@
             ["BOB", "WKS", [], "Invalid/unsupported target currency: [WKS]"]
    ],
   "data_to_convert": [
-    ["USD", "PLN", 100, [434, 436]],
-    []
+    ["USD", "PLN", 100, [434, 436]]
   ]
 }
