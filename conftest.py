@@ -19,7 +19,8 @@ def selenium():
     options.add_experimental_option("excludeSwitches", ["enable-logging"])  # Logowanie webrdiver wyłączone
     service = Service(executable_path="selenium_drivers/chromedriver")
     driver = webdriver.Chrome(service=service, options=options)
-    return driver
+    yield driver
+    driver.quit()
 
 
 @pytest.hookimpl(tryfirst=True)

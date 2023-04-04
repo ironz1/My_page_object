@@ -1,6 +1,7 @@
 from pytest_bdd import scenarios, given, when, then
 from pageobjects.login_page.login_page_actions import LoginPage
-
+from conftest import selenium
+import time
 
 scenarios('regular.feature')
 
@@ -11,6 +12,7 @@ PASSWORD = 'homeconnect1#'
 @given("I enter Nopcommerce page")
 def open_page(base_url, selenium):
     LoginPage(base_url, selenium).open()
+    time.sleep(5)
 
 
 @when("Login screen is displayed")

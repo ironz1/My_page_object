@@ -31,17 +31,57 @@ class Solution:
 
 print(Solution().addTwoNumbers(l1=l3, l2=l4))
 
-# num1 = 5
-# num2 = 2
-# if num2 < num1:
-#     raise ValueError('ELo')
-# else:
-#     raise Exception('To jest blad')
+
+# najczesciej wystepujaca liczba na liscie
+import statistics
+ls1 = [21,13,19,3,11,5,18]
+mode = statistics.mode(ls1)
+print(f'Najczesciej wystepujaca liczba na liscie to {mode}')
+
+# sredia z listy
+srednia = statistics.mean(ls1)
+print(srednia)
+
+# mediana listy
+median = statistics.median(ls1)
+print(median)
 
 
-# for x in range(5):
-#     try:
-#         assert 1 == 2
-#     except AssertionError:
-#         raise Exception('Error')
+#Jaka bedzie dlugość po splicie 2 czy 3 ?
+slowo = 'abc%def%'
+slowo2 = len(slowo.split('%'))
+print(f'Dlugosc listy po podziale {slowo2}')
+
+
+
+# FIFO in python queue
+# Initializing a queue
+def fifo():
+    queue = []
+
+    # Adding elements to the queue
+    queue.append('a')
+    queue.append('b')
+    queue.append('c')
+
+    print("Initial queue")
+    print(queue)
+
+    # Removing elements from the queue
+    print("\nElements dequeued from queue")
+    print(queue.pop(0))
+    print(queue.pop(0))
+    print(queue.pop(0))
+
+    print("\nQueue after removing elements")
+    print(queue)
+
+list_back = list(reversed(range(1,11)))
+print(f'Lista od 1 do 10 od tylu \n{list_back}')
+
+list_back.pop(0)
+
+print(list_back)
+list_back.remove(3)
+print(list_back)
 

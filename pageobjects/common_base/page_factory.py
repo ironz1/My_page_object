@@ -9,15 +9,17 @@ Pages implemented so far:
 4. Bitcoin main page
 5. Bitcoin price page
 """
+import pytest
 
 from pageobjects.login_page.login_page_actions import LoginPage
 from pageobjects.main_page.main_page_actions import MainPage
 
 
-class PageFactory():
-    "PageFactory uses the factory design pattern."
-    def get_page_object(page_name, base_url, selenium):
-        "Return the appropriate page object based on page_name"
+class PageFactory:
+    """PageFactory uses the factory design pattern."""
+
+    def get_page_object(base_url, selenium, page_name):
+        """Return the appropriate page object based on page_name"""
         test_obj = None
         page_name = page_name.lower()
         if page_name in ["login_page"]:

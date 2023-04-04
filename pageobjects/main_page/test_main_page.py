@@ -1,6 +1,7 @@
 from pytest_bdd import scenarios, given, when, then
 from pageobjects.main_page.main_page_actions import MainPage
 from pageobjects.login_page.test_login_page import login
+import time
 
 scenarios('main.feature')
 
