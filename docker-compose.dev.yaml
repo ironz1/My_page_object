@@ -1,0 +1,114 @@
+# To execute this docker-compose yml file use `docker-compose -f docker-compose-v3-full-grid.yml up`
+# Add the `-d` flag at the end for detached execution
+# To stop the execution, hit Ctrl+C, and then `docker-compose -f docker-compose-v3-full-grid.yml down`
+version: "3"
+services:
+  selenium-event-bus:
+    image: selenium/event-bus
+    container_name: selenium-event-bus
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "5557:5557"
+    environment:
+      - SE_HTTP_LOGS=1
+
+  selenium-sessions:
+    image: selenium/sessions
+    container_name: selenium-sessions
+    ports:
+      - "5556:5556"
+    depends_on:
+      - selenium-event-bus
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-event-bus
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_SESSION_RETRY_INTERVAL=0
+
+
+  selenium-session-queue:
+    image: selenium/session-queue
+    container_name: selenium-session-queue
+    ports:
+      - "5559:5559"
+    depends_on:
+      - selenium-event-bus
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-event-bus
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_SESSION_RETRY_INTERVAL=0
+
+  selenium-distributor:
+    image: selenium/distributor
+    container_name: selenium-distributor
+    ports:
+      - "5553:5553"
+    depends_on:
+      - selenium-event-bus
+      - selenium-sessions
+      - selenium-session-queue
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-event-bus
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_SESSIONS_MAP_HOST=selenium-sessions
+      - SE_SESSIONS_MAP_PORT=5556
+      - SE_SESSION_QUEUE_HOST=selenium-session-queue
+      - SE_SESSION_QUEUE_PORT=5559
+      - SE_SESSION_RETRY_INTERVAL=0
+#      - JAVA_OPTS=-Dselenium.LOGGER.level=DEBUG
+      - JAVA_OPTS=-Dwebdriver.chrome.verboseLogging=true
+
+  selenium-router:
+    image: selenium/router
+    container_name: selenium-router
+    ports:
+      - "4444:4444"
+    depends_on:
+      - selenium-distributor
+      - selenium-sessions
+      - selenium-session-queue
+    environment:
+      - SE_DISTRIBUTOR_HOST=selenium-distributor
+      - SE_DISTRIBUTOR_PORT=5553
+      - SE_SESSIONS_MAP_HOST=selenium-sessions
+      - SE_SESSIONS_MAP_PORT=5556
+      - SE_SESSION_QUEUE_HOST=selenium-session-queue
+      - SE_SESSION_QUEUE_PORT=5559
+      - SE_SESSION_RETRY_INTERVAL=0
+
+  chrome:
+    image: selenium/node-chrome
+    shm_size: 2gb
+    depends_on:
+      - selenium-event-bus
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-event-bus
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=2
+      - JAVA_OPTS=-Dwebdriver.chrome.whitelistedIps=
+      - JAVA_OPTS=-Dwebdriver.chrome.verboseLogging=true
+
+
+  y3_tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: test:v4
+    depends_on:
+#      - firefox
+      - chrome
+#      - edge
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-event-bus
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - "9004:5900"
+    links:
+      - selenium-event-bus
+    volumes:
+      - ./reports:/test_root/test-reports/

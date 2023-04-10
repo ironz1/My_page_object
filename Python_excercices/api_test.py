@@ -44,7 +44,7 @@ def test_div(input_numbers, expected_result):
                           ('-5/3', '-15.0000'),
                           ('2.5/10.5', '26.2500'),
                           ('x/3', 'ERROR'),
-                          (pytest.param('5/n', 2, marks=pytest.mark.xfail))])
+                          (pytest.param('4/2', '2.0000', marks=pytest.mark.xfail))])
 def test_mul(input_numbers, expected_result):
     request = requests.get(url=f'http://52.232.60.172:5000/{input_numbers}/mul')
     response = request.json()

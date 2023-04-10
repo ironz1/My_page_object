@@ -1,0 +1,7 @@
+__pycache__
+.git
+.cache
+*.md
+!README*.md
+README-secret.md
+.pytest_cache
